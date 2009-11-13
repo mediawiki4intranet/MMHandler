@@ -68,13 +68,13 @@ class MMPlayCode extends MediaTransformOutput
         $h = $this->height;
 
         return <<<EOF
-$prefix<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="$w" height="$h">
+$prefix<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="$h">
     <param name="movie" value="$wgVisorFreemind" />
     <param name="allowfullscreen" value="true" />
     <param name="flashvars" value="openUrl=_blank&initLoadFile=$strURL&startCollapsedToLevel=5" />
     <param name="quality" value="high" />
     <param name="bgcolor" value="#FFFFFF" />
-    <embed type="application/x-shockwave-flash" width="$w" height="$h"
+    <embed type="application/x-shockwave-flash" width="100%" height="$h"
         allowfullscreen="true"
         src="$wgVisorFreemind"
         flashvars="openUrl=_blank&initLoadFile=$strURL&startCollapsedToLevel=5" />

@@ -62,7 +62,7 @@ class MMPlayCode extends MediaTransformOutput
             $prefix = '<div class="' . $className . '">';
         }
 
-        $strURL = $this->file->getUrl();
+        $strURL = urlencode($this->file->getUrl());
 
         $w = $this->width;
         $h = $this->height;

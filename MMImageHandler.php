@@ -113,12 +113,11 @@ class MMImageHandler extends ImageHandler
     {
         if ($params['width'] == -1)
             unset($params['width']);
-        if ($params['height'] == -1)
-            unset($params['height']);
+        else
+            $params['height'] = $params['width'];
         $params['nolink'] = $params['nolink'] ? true : false;
-        if (!$params['width'])
-            $params['width'] = '90%';
-        else if ($params['height'] &&
+        $params['width'] = '90%';
+        if ($params['height'] &&
             substr($params['height'], -1) == '%' &&
             substr($params['width'], -1) != '%')
             $params['height'] = intval($params['width'] * intval(substr($params['width'], 0, -1)) / 100);

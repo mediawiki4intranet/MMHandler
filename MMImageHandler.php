@@ -85,6 +85,7 @@ class MMPlayCode extends MediaTransformOutput
         # TODO png thumbnails if $params['noflash']
 
         $n = preg_replace('/\D+/','',microtime(true));
+        wfLoadExtensionMessages('MMHandler');
         $unfold = wfMsg('mm-unfold');
         $fold = wfMsg('mm-fold');
         if (!$this->noflash)

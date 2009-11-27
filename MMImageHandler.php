@@ -25,10 +25,21 @@ class MMPlayCode extends MediaTransformOutput
     {
         $this->file = $file;
         $this->url = $url;
-        $this->width = $params['width'];
-        $this->height = $params['height'];
+        $w = $params['width'];
+        $h = $params['height'];
+        if (substr($w, -1) == '%')
+            $w = intval(substr($w, 0, -1)) . '%';
+        else
+            $w = intval($w);
+        if (substr($h, -1) == '%')
+            $h = intval(substr($h, 0, -1)) . '%';
+        else
+            $h = intval($h);
+        $this->width = $w;
+        $this->height = $h;
         $this->path = $path;
         $this->page = $page;
+        $this->noflash = $params['noflash'];
     }
 
     /**
@@ -73,19 +84,35 @@ class MMPlayCode extends MediaTransformOutput
 
         # TODO png thumbnails if $params['noflash']
 
-        return <<<EOF
+        $n = preg_replace('/\D+/','',microtime(true));
+        $unfold = wfMsg('mm-unfold');
+        $fold = wfMsg('mm-fold');
+        if (!$this->noflash)
+        {
+            $sw = $w;
+            if (substr($sw, -1) != '%')
+                $sw .= "px";
+            $sh = $h;
+            if (substr($sh, -1) != '%')
+                $sh .= "px";
+            $code = <<<EOF
 $prefix<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="$w" height="$h">
     <param name="movie" value="$wgVisorFreemind" />
     <param name="allowfullscreen" value="true" />
     <param name="flashvars" value="openUrl=_blank&initLoadFile=$strURL&startCollapsedToLevel=5" />
     <param name="quality" value="high" />
     <param name="bgcolor" value="#FFFFFF" />
-    <embed type="application/x-shockwave-flash" width="$w" height="$h"
+    <embed id="mindmap$n" type="application/x-shockwave-flash" width="$w" height="$h"
         allowfullscreen="true"
         src="$wgVisorFreemind"
         flashvars="openUrl=_blank&initLoadFile=$strURL&startCollapsedToLevel=5" />
-</object><p>$link</p>$postfix
+</object><script type="text/javascript" src="$wgScriptPath/extensions/MMHandler/MMHandler.js"></script>
+<p>$link <a style="cursor:pointer" onclick="mmhandler_unfold('$n',0)" id="mindmapunfold$n">$unfold</a><a style="display:none;cursor:pointer" onclick="mmhandler_unfold('$n',1,'$sw','$sh')" id="mindmapfold$n">$fold</a></p>$postfix
 EOF;
+        }
+        else
+            $code = $link;
+        return $code;
     }
 }
 
@@ -123,7 +150,7 @@ class MMImageHandler extends ImageHandler
             $params['height'] = intval($params['width'] * intval(substr($params['width'], 0, -1)) / 100);
         if (!$params['height'])
             $params['height'] = 480;
-        if ($params['makeflvthumbnail'] || $params['imagegallery'])
+        if ($params['makeflvthumbnail'] || $params['imagegallery'] || $params['imagehistory'])
             $params['noflash'] = true;
         return true;
     }

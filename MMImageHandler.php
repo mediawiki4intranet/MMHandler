@@ -56,7 +56,7 @@ class MMPlayCode extends MediaTransformOutput
         if (!$wgVisorFreemind)
             $wgVisorFreemind = 'extensions/MMHandler/visorFreemind.swf';
         if (!preg_match('#^([a-z]+:/)?/#is', $wgVisorFreemind) &&
-            substr($wgVisorFreemind, 0, strlen($wgScriptPath) != $wgScriptPath))
+            (substr($wgVisorFreemind, 0, strlen($wgScriptPath) != $wgScriptPath) || !$wgScriptPath))
             $wgVisorFreemind = $wgScriptPath . '/'. $wgVisorFreemind;
 
         $prefix = '<div>';

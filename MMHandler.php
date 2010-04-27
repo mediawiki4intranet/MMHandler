@@ -34,4 +34,3 @@ if (!in_array('mm', $wgFileExtensions))
     $wgFileExtensions[] = 'mm';
 $wgXMLMimeTypes['map'] = 'application/x-freemind';
 
-?>

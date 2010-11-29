@@ -33,4 +33,13 @@ $wgMediaHandlers['application/x-freemind'] = 'MMImageHandler';
 if (!in_array('mm', $wgFileExtensions))
     $wgFileExtensions[] = 'mm';
 $wgXMLMimeTypes['map'] = 'application/x-freemind';
+$wgExtensionFunctions[] = 'egInstallMMHandlerTypes';
 
+function egInstallMMHandlerTypes()
+{
+    $mm = MimeMagic::singleton();
+    if (strpos($mm->mExtToMime['mm'], 'application/x-freemind') === false)
+        $mm->mExtToMime['mm'] = trim($mm->mExtToMime['mm'] . ' application/x-freemind');
+    if (strpos($mm->mMimeToExt['application/x-freemind'], 'mm') === false)
+        $mm->mMimeToExt['application/x-freemind'] = trim($mm->mMimeToExt['application/x-freemind'] . ' mm');
+}

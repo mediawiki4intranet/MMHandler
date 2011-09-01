@@ -38,8 +38,12 @@ $wgExtensionFunctions[] = 'egInstallMMHandlerTypes';
 function egInstallMMHandlerTypes()
 {
     $mm = MimeMagic::singleton();
-    if (strpos($mm->mExtToMime['mm'], 'application/x-freemind') === false)
-        $mm->mExtToMime['mm'] = trim($mm->mExtToMime['mm'] . ' application/x-freemind');
-    if (strpos($mm->mMimeToExt['application/x-freemind'], 'mm') === false)
-        $mm->mMimeToExt['application/x-freemind'] = trim($mm->mMimeToExt['application/x-freemind'] . ' mm');
+    if (empty($mm->mExtToMime['mm']))
+        $mm->mExtToMime['mm'] = 'application/x-freemind';
+    elseif (strpos($mm->mExtToMime['mm'], 'application/x-freemind') === false)
+        $mm->mExtToMime['mm'] = trim($mm->mExtToMime['mm']) . ' application/x-freemind';
+    if (empty($mm->mMimeToExt['application/x-freemind']))
+        $mm->mMimeToExt['application/x-freemind'] = 'mm';
+    elseif (strpos($mm->mMimeToExt['application/x-freemind'], 'mm') === false)
+        $mm->mMimeToExt['application/x-freemind'] = trim($mm->mMimeToExt['application/x-freemind']) . ' mm';
 }

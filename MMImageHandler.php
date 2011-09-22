@@ -39,7 +39,7 @@ class MMPlayCode extends MediaTransformOutput
         $this->height = $h;
         $this->path = $path;
         $this->page = $page;
-        $this->noflash = $params['noflash'];
+        $this->noflash = !empty($params['noflash']);
     }
 
     /**
@@ -143,15 +143,17 @@ class MMImageHandler extends ImageHandler
             unset($params['width']);
         else
             $params['height'] = $params['width'];
-        $params['nolink'] = $params['nolink'] ? true : false;
+        $params['nolink'] = !empty($params['nolink']);
         $params['width'] = '90%';
-        if ($params['height'] &&
+        if (!empty($params['height']) &&
             substr($params['height'], -1) == '%' &&
             substr($params['width'], -1) != '%')
             $params['height'] = intval($params['width'] * intval(substr($params['width'], 0, -1)) / 100);
-        if (!$params['height'])
+        if (empty($params['height']))
             $params['height'] = 480;
-        if ($params['makeflvthumbnail'] || $params['imagegallery'] || $params['imagehistory'])
+        if (!empty($params['makeflvthumbnail']) ||
+            !empty($params['imagegallery']) ||
+            !empty($params['imagehistory']))
             $params['noflash'] = true;
         return true;
     }

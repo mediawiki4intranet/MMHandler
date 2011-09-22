@@ -1,15 +1,14 @@
 <?php
 /**
  * Internationalisation file for FlvHandler extension.
- *
  * @addtogroup Extensions
-*/
+ */
 
 $messages = array();
 
 $messages['en'] = array(
     'mmhandler_desc'      => 'Allows mindmap (.mm) files to be used in standard image tags (e.g. <nowiki>[[Image:Mindmap.mm]]</nowiki>)',
-    'mm-long-desc'        => '(Flash video, $1 × $2 pixels, file size: $3)',
+    'mm-long-desc'        => '(Flash video, file size: $3)',
     'mm-fold'             => '[fold]',
     'mm-unfold'           => '[maximize]',
 );
@@ -20,5 +19,3 @@ $messages['ru'] = array(
     'mm-fold'             => '[свернуть]',
     'mm-unfold'           => '[на всё окно]',
 );
-
-?>

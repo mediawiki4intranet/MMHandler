@@ -8,7 +8,7 @@ $messages = array();
 
 $messages['en'] = array(
     'mmhandler_desc'      => 'Allows mindmap (.mm) files to be used in standard image tags (e.g. <nowiki>[[Image:Mindmap.mm]]</nowiki>)',
-    'mm-long-desc'        => '(Flash video, file size: $3)',
+    'mm-long-desc'        => '(Mindmap, file size: $3)',
     'mm-fold'             => '[fold]',
     'mm-unfold'           => '[maximize]',
 );

@@ -80,7 +80,7 @@ class MMPlayCode extends MediaTransformOutput
 
         global $wgUser;
         $title = $this->file->getTitle();
-        $link = $wgUser->getSkin()->link($title);
+        $link = $w > 150 ? $wgUser->getSkin()->link($title) : '';
 
         # TODO png thumbnails if $params['noflash']
 
@@ -108,7 +108,7 @@ $prefix<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="$w" h
         src="$wgVisorFreemind"
         flashvars="openUrl=_blank&initLoadFile=$strURL&startCollapsedToLevel=5" />
 </object><script type="text/javascript" src="$wgScriptPath/extensions/MMHandler/MMHandler.js"></script>
-<p>$link <a style="cursor:pointer" onclick="mmhandler_unfold('$n',0)" id="mindmapunfold$n">$unfold</a><a style="display:none;cursor:pointer" onclick="mmhandler_unfold('$n',1,'$sw','$sh')" id="mindmapfold$n">$fold</a></p>$postfix
+<p style="margin-top: 0">$link <a style="cursor:pointer" onclick="mmhandler_unfold('$n',0)" id="mindmapunfold$n">$unfold</a><a style="display:none;cursor:pointer" onclick="mmhandler_unfold('$n',1,'$sw','$sh')" id="mindmapfold$n">$fold</a></p>$postfix
 EOF;
         }
         else

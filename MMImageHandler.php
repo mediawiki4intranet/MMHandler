@@ -165,7 +165,7 @@ class MMImageHandler extends ImageHandler
         return new MMPlayCode($image, $dstUrl, $params, $dstPath, false);
     }
 
-    function getThumbType($ext, $mime)
+    function getThumbType($ext, $mime, $params = NULL)
     {
         return array('mm', 'application/x-freemind');
     }

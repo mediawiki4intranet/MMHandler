@@ -30,11 +30,11 @@ class MMPlayCode extends MediaTransformOutput
         if (substr($w, -1) == '%')
             $w = intval(substr($w, 0, -1)) . '%';
         else
-            $w = intval($w);
+            $w = intval($w) < 0 ? false : intval($w);
         if (substr($h, -1) == '%')
             $h = intval(substr($h, 0, -1)) . '%';
         else
-            $h = intval($h);
+            $h = intval($h) < 0 ? false : intval($h);
         $this->width = $w;
         $this->height = $h;
         $this->path = $path;

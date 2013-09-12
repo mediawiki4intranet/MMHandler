@@ -85,7 +85,6 @@ class MMPlayCode extends MediaTransformOutput
         # TODO png thumbnails if $params['noflash']
 
         $n = preg_replace('/\D+/','',microtime(true));
-        wfLoadExtensionMessages('MMHandler');
         $unfold = wfMsg('mm-unfold');
         $fold = wfMsg('mm-fold');
         if (!$this->noflash)
@@ -173,7 +172,6 @@ class MMImageHandler extends ImageHandler
     function getLongDesc($file)
     {
         global $wgLang;
-        wfLoadExtensionMessages('MMHandler');
         return wfMsgExt('mm-long-desc', 'parseinline',
             $wgLang->formatNum($file->getWidth()),
             $wgLang->formatNum($file->getHeight()),

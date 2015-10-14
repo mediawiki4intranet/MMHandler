@@ -33,10 +33,14 @@ $wgMediaHandlers['application/x-freemind'] = 'MMImageHandler';
 if (!in_array('mm', $wgFileExtensions))
     $wgFileExtensions[] = 'mm';
 $wgXMLMimeTypes['map'] = 'application/x-freemind';
-$wgExtensionFunctions[] = 'egInstallMMHandlerTypes';
+$wgHooks['MimeMagicInit'][] = 'egInstallMMHandlerTypes';
+$wgExtensionFunctions[] = 'egInitMMHandler';
 
-function egInstallMMHandlerTypes()
+function egInitMMHandler()
 {
+    global $wgVersion;
+    if (version_compare($wgVersion, '1.24', '>='))
+        return;
     $mm = MimeMagic::singleton();
     if (empty($mm->mExtToMime['mm']))
         $mm->mExtToMime['mm'] = 'application/x-freemind';
@@ -46,4 +50,10 @@ function egInstallMMHandlerTypes()
         $mm->mMimeToExt['application/x-freemind'] = 'mm';
     elseif (strpos($mm->mMimeToExt['application/x-freemind'], 'mm') === false)
         $mm->mMimeToExt['application/x-freemind'] = trim($mm->mMimeToExt['application/x-freemind']) . ' mm';
+}
+
+function egInstallMMHandlerTypes($mm)
+{
+    $mm->addExtraTypes("application/x-freemind mm");
+    return true;
 }

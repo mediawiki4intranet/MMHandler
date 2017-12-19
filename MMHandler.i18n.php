@@ -1,6 +1,6 @@
 <?php
 /**
- * Internationalisation file for FlvHandler extension.
+ * Internationalisation file for MMHandler extension.
  * @addtogroup Extensions
  */
 

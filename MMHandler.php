@@ -16,7 +16,7 @@ if (!defined('MEDIAWIKI'))
  */
 
 // Extension credits that will show up on Special:Version
-$wgExtensionCredits['parserhook'][] = array(
+$wgExtensionCredits['media'][] = array(
     'name'         => 'FreeMind mindmap Handler',
     'version'      => 'r2',
     'author'       => 'Vitaliy Filippov',

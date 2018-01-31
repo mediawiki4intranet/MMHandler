@@ -21,7 +21,7 @@ class MMPlayCode extends MediaTransformOutput
     /**
      * Constructor
      */
-    function MMPlayCode ($file, $url, $params, $path = false, $page = false)
+    function __construct ($file, $url, $params, $path = false, $page = false)
     {
         $this->file = $file;
         $this->url = $url;
@@ -85,8 +85,8 @@ class MMPlayCode extends MediaTransformOutput
         # TODO png thumbnails if $params['noflash']
 
         $n = preg_replace('/\D+/','',microtime(true));
-        $unfold = wfMsg('mm-unfold');
-        $fold = wfMsg('mm-fold');
+        $unfold = wfMessage( 'mm-unfold' )->text();
+        $fold = wfMessage( 'mm-fold' )->text();
         if (!$this->noflash)
         {
             $sw = $w;
@@ -172,9 +172,10 @@ class MMImageHandler extends ImageHandler
     function getLongDesc($file)
     {
         global $wgLang;
-        return wfMsgExt('mm-long-desc', 'parseinline',
+        return wfMessage('mm-long-desc',
             $wgLang->formatNum($file->getWidth()),
             $wgLang->formatNum($file->getHeight()),
-            $wgLang->formatSize($file->getSize()));
+            $wgLang->formatSize($file->getSize()))
+        ->parse();
     }
 }
